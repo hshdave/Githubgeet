@@ -85,7 +85,7 @@ public class UserList extends AppCompatActivity {
                     {
                             JSONObject userobj = itmarray.getJSONObject(i);
 
-                            usersarray.add(new Users(userobj.getString("login")));
+                            usersarray.add(new Users(userobj.getString("login"),userobj.getString("url")));
                     }
 
                     Userlistadapter userlistadapter = new Userlistadapter(usersarray,UserList.this);
