@@ -19,6 +19,7 @@ tools:context="com.example.a1694163.github.FollowerActivity">
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/edt_schur"
+        android:singleLine="true"
         app:layout_constraintHorizontal_bias="0.367"
         android:hint="Search User!"/>
 

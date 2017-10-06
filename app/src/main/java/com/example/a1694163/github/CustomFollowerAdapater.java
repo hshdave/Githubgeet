@@ -68,6 +68,11 @@ public class CustomFollowerAdapater extends ArrayAdapter<Follower> {
                 Toast.makeText(c,"Clicked On "+getItem(position).getName(),Toast.LENGTH_LONG).show();
 
                 System.out.println("Follower link "+ getItem(position).getProurl());
+                String prourl=getItem(position).getProurl();
+                Intent i=new Intent(c,MainActivity.class);
+
+                i.putExtra("prourl",prourl);
+                c.startActivity(i);
             }
         });
 

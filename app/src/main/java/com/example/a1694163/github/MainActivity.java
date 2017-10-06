@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements CallBackMe  {
     ListView mylistview;
     ImageView img_v;
 
-    TextView txtnm;
+    TextView txtnm,disflw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements CallBackMe  {
 
         img_v =  (ImageView) findViewById(R.id.avatar);
         txtnm = (TextView) findViewById(R.id.login);
+
+        disflw = (TextView) findViewById(R.id.dis_flw);
 
         Intent i =  getIntent();
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements CallBackMe  {
         System.out.println("Check Followers Link "+ flw);
 
         mylistview=(ListView)findViewById(R.id.listview);
+
 
         new Userdata().execute(url);
         JsonRetriever.RetrieveFromURL(this, url+"/followers", this);
@@ -69,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements CallBackMe  {
                 followers[position] = current;
             }
 
+            if (followers.length==0)
+            {
+                disflw.setText("0");
+            }
             CustomFollowerAdapater cfa = new CustomFollowerAdapater(MainActivity.this, followers);
             mylistview.setAdapter(cfa);
 
@@ -91,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements CallBackMe  {
             super.onPostExecute(s);
 
 
-            System.out.println("Check progiel url "+s);
+            System.out.println("Check prog json "+s);
 
             if(s!=null)
             {
@@ -101,7 +108,15 @@ public class MainActivity extends AppCompatActivity implements CallBackMe  {
 
                     Picasso.with(MainActivity.this).load(mainObj.getString("avatar_url")).into(img_v);
 
-                    txtnm.setText(mainObj.getString("name"));
+                    if(mainObj.getString("name").contains("null"))
+                    {
+                        txtnm.setText("");
+                    }else
+                    {
+                        txtnm.setText(mainObj.getString("name"));
+                    }
+
+
 
 
                 }catch (JSONException e)
